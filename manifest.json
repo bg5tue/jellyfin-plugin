@@ -1,0 +1,20 @@
+[
+    {
+        "category": "Metadata",
+        "guid": "52eb4c4a-d4bc-11eb-b616-000c290aa604",
+        "name": "AvMoo",
+        "description": "Get metadata for movies and other video content from OMDb.",
+        "owner": "bg5tue",
+        "overview": "Get metadata for movies and other video content from OMDb.",
+        "versions":[
+            {
+                "checksum": "294de813786cd6e50f42ecb6df148e527585f62a",
+                "changelog": "new release",
+                "targetAbi": "10.7.0.0",
+                "sourceUrl": "https://gitee.com/bg5tue/jellyfin-plugin/attach_files/751811/download/Jellyfin.Plugin.AvMoo.zip",
+                "timestamp": "2021-06-25 11:27:30",
+                "version": "1.0"
+            }
+        ] 
+    }
+]
