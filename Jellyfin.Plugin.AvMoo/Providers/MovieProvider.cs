@@ -78,6 +78,7 @@ namespace Jellyfin.Plugin.AvMoo.Providers
 
             if (!string.IsNullOrEmpty(id))
             {
+                // id 不为空，添加到 id 列表
                 idList = new List<string>
                 {
                     id
@@ -85,13 +86,17 @@ namespace Jellyfin.Plugin.AvMoo.Providers
             }
             else
             {
+                // id 为空，则通过名称在线搜索并返回搜索结果的 id 列表
                 idList = (List<string>)await GetIdsAsync(searchInfo.Name, cancellationToken).ConfigureAwait(false);
             }
 
+            // 遍历 id 列表
             foreach (string idItem in idList)
             {
-                var item = await GetDetailAsync(id, cancellationToken).ConfigureAwait(false);
+                // 获取 id 为 idItem 的影片详情
+                var item = await GetDetailAsync(idItem, cancellationToken).ConfigureAwait(false);
 
+                // 转换为 Jellyfin 查找结果(RemoteSearchResult)对象
                 var searchResult = new RemoteSearchResult()
                 {
                     Name = item.Title,
@@ -99,13 +104,17 @@ namespace Jellyfin.Plugin.AvMoo.Providers
                     Overview = item.Intro
                 };
 
+                // 如果发行日期不为空，则设置年份
                 if (item.ReleaseDate != null)
                 {
                     searchResult.PremiereDate = item.ReleaseDate;
                     searchResult.ProductionYear = item.ReleaseDate?.Year;
                 }
 
+                // 设置 id
                 searchResult.SetProviderId(Plugin.ProviderId, id);
+
+                // 添加到搜索结果列表
                 results.Add(searchResult);
             }
 
@@ -123,9 +132,9 @@ namespace Jellyfin.Plugin.AvMoo.Providers
         }
 
         /// <summary>
-        /// 拉取 html 源码
+        /// 下载 html 源码
         /// </summary>
-        /// <param name="url"></param>
+        /// <param name="url">要下载 html 源码的 url</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         public async Task<string> GetHtmlAsync(string url, CancellationToken cancellationToken)

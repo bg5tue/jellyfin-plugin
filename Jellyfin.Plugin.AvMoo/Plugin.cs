@@ -14,15 +14,17 @@ namespace Jellyfin.Plugin.AvMoo
 
         public override Guid Id => Guid.Parse("52eb4c4a-d4bc-11eb-b616-000c290aa604");
 
+        public override string Description => "Get metadata for movies and other video content from AvMoo.";
+
+        public static Plugin Instance { get; private set; }
+
+        public static string ProviderId => "AvMoo Id";        
+
         public Plugin(IApplicationPaths applicationPaths, IXmlSerializer xmlSerializer) 
             : base(applicationPaths, xmlSerializer)
         {
             Instance = this;
         }
-
-        public static Plugin Instance { get; private set; }
-
-        public static string ProviderId => "AvMoo Id";
 
         public IEnumerable<PluginPageInfo> GetPages()
         {

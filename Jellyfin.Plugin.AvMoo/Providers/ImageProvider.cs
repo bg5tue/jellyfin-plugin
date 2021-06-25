@@ -18,51 +18,66 @@ namespace Jellyfin.Plugin.AvMoo.Providers
 {
     public class ImageProvider : IRemoteImageProvider
     {
+        private readonly IHttpClientFactory _httpClientFactory;
+        private readonly ILogger<ImageProvider> _logger;
+
         public string Name => "AvMoo Image Provider";
 
-        private readonly IHttpClientFactory _httpClientFactory;
-        private readonly ILogger _logger;
-
-        public ImageProvider(IHttpClientFactory httpClientFactory, ILogger logger)
+        public ImageProvider(IHttpClientFactory httpClientFactory, ILogger<ImageProvider> logger)
         {
             _httpClientFactory = httpClientFactory;
             _logger = logger;
         }
 
-        public async Task<HttpResponseMessage> GetImageResponse(string url, CancellationToken cancellationToken) =>
-            await _httpClientFactory.CreateClient(NamedClient.Default).GetAsync(url, cancellationToken);
-
-        public Task<IEnumerable<RemoteImageInfo>> GetImages(BaseItem item, CancellationToken cancellationToken)
+        public Task<HttpResponseMessage> GetImageResponse(string url, CancellationToken cancellationToken)
         {
-            //var list = new List<RemoteImageInfo>();
+            return _httpClientFactory.CreateClient(NamedClient.Default).GetAsync(new Uri(url), cancellationToken);
+        }
 
-            //// 读取 AvMoo Id
-            //var id = item.GetProviderId(Plugin.ProviderId);
+        public async Task<IEnumerable<RemoteImageInfo>> GetImages(BaseItem item, CancellationToken cancellationToken)
+        {
+            var list = new List<RemoteImageInfo>();
 
-            //// 如果 AvMoo Id 为空，则返回空列表
-            //if (string.IsNullOrWhiteSpace(id))
-            //{
-            //    _logger.LogWarning($"GetImages failed because that the sid is empty: {item.Name}");
-            //    return list;
-            //}
+            // 读取 AvMoo Id
+            var id = item.GetProviderId(Plugin.ProviderId);
 
-            throw new NotImplementedException();
+            // 如果 AvMoo Id 为空，则返回空列表
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                _logger.LogWarning($"GetImages failed because that the sid is empty: {item.Name}");
+                return list;
+            }
+
+            var url = $"https://{Plugin.Instance.Configuration.Domain}/{Plugin.Instance.Configuration.Language}/movie/{id}";
+            var html = await _httpClientFactory.CreateClient(NamedClient.Default).GetStringAsync(url, cancellationToken);
+
+
+
+
+            return list;
         }
 
         public IEnumerable<ImageType> GetSupportedImages(BaseItem item)
         {
-            return new List<ImageType>
-            {
-                ImageType.Primary,
-                ImageType.Backdrop,
-                ImageType.Screenshot,
-                ImageType.Thumb
-            };
+            yield return ImageType.Primary;
+            yield return ImageType.Backdrop;
+            yield return ImageType.Screenshot;
+            yield return ImageType.Thumb;
+
+            //return new List<ImageType>
+            //{
+            //    ImageType.Primary,
+            //    ImageType.Backdrop,
+            //    ImageType.Screenshot,
+            //    ImageType.Thumb
+            //};
+
+            //throw new NotImplementedException();
         }
 
         public bool Supports(BaseItem item)
         {
-            return item is Movie || item is Series;
+            return item is Movie;
         }
     }
 }
