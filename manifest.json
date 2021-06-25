@@ -8,7 +8,7 @@
         "overview": "Get metadata for movies and other video content from OMDb.",
         "versions":[
             {
-                "checksum": "294de813786cd6e50f42ecb6df148e527585f62a",
+                "checksum": "fe094990848ed75f6b18bebc450085f5",
                 "changelog": "new release",
                 "targetAbi": "10.7.0.0",
                 "sourceUrl": "https://gitee.com/bg5tue/jellyfin-plugin/attach_files/751811/download/Jellyfin.Plugin.AvMoo.zip",
