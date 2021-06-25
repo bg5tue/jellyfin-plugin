@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31410.414
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jellyfin.Plugin.AvMoo", "Jellyfin.Plugin.AvMoo\Jellyfin.Plugin.AvMoo.csproj", "{82D15799-1E05-420B-9056-1D9C4C6B4363}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jellyfin.Plugin.AvMoo", "Jellyfin.Plugin.AvMoo\Jellyfin.Plugin.AvMoo.csproj", "{CC3DE439-6549-4901-A509-EA49CCDF53E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{82D15799-1E05-420B-9056-1D9C4C6B4363}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{82D15799-1E05-420B-9056-1D9C4C6B4363}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{82D15799-1E05-420B-9056-1D9C4C6B4363}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{82D15799-1E05-420B-9056-1D9C4C6B4363}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC3DE439-6549-4901-A509-EA49CCDF53E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC3DE439-6549-4901-A509-EA49CCDF53E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC3DE439-6549-4901-A509-EA49CCDF53E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC3DE439-6549-4901-A509-EA49CCDF53E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

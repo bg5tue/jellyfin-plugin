@@ -1,17 +1,25 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<TargetFramework>net5.0</TargetFramework>
-	</PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>Jellyfin.Plugin.AvMoo</RootNamespace>
+    <AssemblyVersion>1.1.2.0</AssemblyVersion>
+    <FileVersion>1.0</FileVersion>
+  </PropertyGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Jellyfin.Controller" Version="10.*-*" />
-		<PackageReference Include="Jellyfin.Model" Version="10.*-*" />
-	</ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Providers\ImageProvider.cs" />
+  </ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Configuration\" />
-	  <Folder Include="Models\" />
-	  <Folder Include="Providers\" />
-	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Jellyfin.Controller" Version="10.*-*" />
+    <PackageReference Include="Jellyfin.Model" Version="10.*-*" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Configuration\configPage.html" />
+    <EmbeddedResource Include="Configuration\configPage.html" />
+  </ItemGroup>
+
 </Project>
