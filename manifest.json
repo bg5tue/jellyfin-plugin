@@ -22,6 +22,14 @@
                 "sourceUrl": "https://gitee.com/bg5tue/jellyfin-plugin/attach_files/753776/download/Jellyfin.Plugin.AvMoo.zip",
                 "timestamp": "2021-06-27 12:07:10",
                 "version": "1.1.3"
+            },
+            {
+                "checksum": "16049cec027cb2dfec3edfc8382f8578",
+                "changelog": "* 修复 ExternalId 中的 UrlFormatString 没有 https 导致无法打开源影片页面的问题。",
+                "targetAbi": "10.7.0.0",
+                "sourceUrl": "https://gitee.com/bg5tue/jellyfin-plugin/attach_files/753827/download/Jellyfin.Plugin.AvMoo.zip",
+                "timestamp": "2021-06-27 12:42:31",
+                "version": "1.2.4"
             }
         ]
     }
