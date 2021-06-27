@@ -3,9 +3,9 @@
         "category": "Metadata",
         "guid": "52eb4c4a-d4bc-11eb-b616-000c290aa604",
         "name": "AvMoo",
-        "description": "从 AvMoo 获取电影元数据。",
+        "description": "安装本插件，配置完相关数据后，可以从 AvMoo 获取电影元数据。",
         "owner": "bg5tue",
-        "overview": "安装本插件，配置完相关数据后，可以从 AvMoo 获取电影元数据。",
+        "overview": "从 AvMoo 获取电影元数据。",
         "versions":[
             {
                 "checksum": "fe094990848ed75f6b18bebc450085f5",
