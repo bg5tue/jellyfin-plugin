@@ -1,4 +1,5 @@
-﻿using MediaBrowser.Controller.Entities.Movies;
+﻿using MediaBrowser.Controller.Entities;
+using MediaBrowser.Controller.Entities.Movies;
 using MediaBrowser.Controller.Providers;
 using MediaBrowser.Model.Entities;
 using MediaBrowser.Model.Providers;
@@ -16,13 +17,13 @@ namespace Jellyfin.Plugin.AvMoo
 
         public string Key => Plugin.ProviderId;
 
-        public ExternalIdMediaType? Type => ExternalIdMediaType.Movie;
+        public ExternalIdMediaType? Type => null;
 
-        public string UrlFormatString => $"{Plugin.Instance.Configuration.Domain}/{Plugin.Instance.Configuration.Language.ToString().ToLower()}/movie/{{0}}";
+        public string UrlFormatString => $"https://{Plugin.Instance.Configuration.Domain}/{Plugin.Instance.Configuration.Language.ToString().ToLower()}/movie/{{0}}";
 
         public bool Supports(IHasProviderIds item)
         {
-            return item is Movie;
+            return item is Movie || item is Video;
         }
     }
 }
