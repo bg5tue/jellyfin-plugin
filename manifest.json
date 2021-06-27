@@ -3,9 +3,9 @@
         "category": "Metadata",
         "guid": "52eb4c4a-d4bc-11eb-b616-000c290aa604",
         "name": "AvMoo",
-        "description": "Get metadata for movies and other video content from OMDb.",
+        "description": "从 AvMoo 获取电影元数据。",
         "owner": "bg5tue",
-        "overview": "Get metadata for movies and other video content from OMDb.",
+        "overview": "安装本插件，配置完相关数据后，可以从 AvMoo 获取电影元数据。",
         "versions":[
             {
                 "checksum": "fe094990848ed75f6b18bebc450085f5",
@@ -13,8 +13,16 @@
                 "targetAbi": "10.7.0.0",
                 "sourceUrl": "https://gitee.com/bg5tue/jellyfin-plugin/attach_files/751811/download/Jellyfin.Plugin.AvMoo.zip",
                 "timestamp": "2021-06-25 11:27:30",
-                "version": "1.0"
+                "version": "1.1.2"
+            },
+            {
+                "checksum": "9d9c8bb1f3e65cc2c50e8a73fd9ebdf4",
+                "changelog": "+ 新增图片下载功能，具体在影片菜单“修改图片”中使用。<br/> * 修复配置默认值中缩略图单图正则不正确，导致获取不到截图的问题。",
+                "targetAbi": "10.7.0.0",
+                "sourceUrl": "https://gitee.com/bg5tue/jellyfin-plugin/attach_files/753776/download/Jellyfin.Plugin.AvMoo.zip",
+                "timestamp": "2021-06-27 12:07:10",
+                "version": "1.1.3"
             }
-        ] 
+        ]
     }
 ]
