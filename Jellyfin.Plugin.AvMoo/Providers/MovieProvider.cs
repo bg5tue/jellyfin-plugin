@@ -162,7 +162,7 @@ namespace Jellyfin.Plugin.AvMoo.Providers
         {
             var idList = new List<string>();
 
-            // 生成 url
+            // 查找页 url
             var url = $"https://{Plugin.Instance.Configuration.Domain}/{Plugin.Instance.Configuration.Language.ToString().ToLower()}/search/{key}";
 
             // 拉取 html
@@ -194,8 +194,10 @@ namespace Jellyfin.Plugin.AvMoo.Providers
                 return result;
             }
 
+            // 取得 影片详情
             var movie = await GetDetailAsync(id, cancellationToken);
 
+            // 设置要返回的结果项
             result.Item = await TransMediaInfoAsync(movie, cancellationToken);
 
             // 添加 导演
@@ -236,6 +238,9 @@ namespace Jellyfin.Plugin.AvMoo.Providers
 
             var movie = new MovieDetail();
 
+            // 设置 影片 主页
+            movie.FromUrl = url;
+
             // 匹配 标题和番号
             var match = Regex.Match(html, Plugin.Instance.Configuration.TitlePattern); //@"<h3>(?<id>[A-Z\d\-]+)\s(?<title>.*?)</h3>"
 
@@ -247,7 +252,7 @@ namespace Jellyfin.Plugin.AvMoo.Providers
                 // 设置标题
                 movie.Title = match.Groups["title"].Value.Trim();
             }
-
+            /*
             // 匹配 大封面
             match = Regex.Match(html, Plugin.Instance.Configuration.CoverPattern); //@"bigImage""\shref=""(?<large>.*?)"""
 
@@ -255,7 +260,7 @@ namespace Jellyfin.Plugin.AvMoo.Providers
             {
                 movie.Images.Large = match.Groups["large"].Value.Trim();
             }
-
+            */
             // 匹配 发行日期
             match = Regex.Match(html, Plugin.Instance.Configuration.ReleaseDatePattern); //@"发行时间:</span>\s(?<date>.*?)</p>"
             if (match.Success)
@@ -366,7 +371,7 @@ namespace Jellyfin.Plugin.AvMoo.Providers
                     }
                 }
             }
-
+            /*
             // 匹配 缩略图
             match = Regex.Match(html, Plugin.Instance.Configuration.ScreenshotListPattern); //@"sample-waterfall"">\s*(?<thumbnails>[\w\W]*?)\s*</div>\s*<div"
             if (match.Success)
@@ -380,7 +385,7 @@ namespace Jellyfin.Plugin.AvMoo.Providers
                     }
                 }
             }
-
+            */
             return movie;
         }
 
@@ -394,6 +399,7 @@ namespace Jellyfin.Plugin.AvMoo.Providers
         {
             return await Task.Run(() =>
             {
+                // 设置 基础信息
                 var movie = new Movie
                 {
                     Name = detail.Title,
@@ -404,27 +410,34 @@ namespace Jellyfin.Plugin.AvMoo.Providers
                     HomePageUrl = detail.FromUrl
                 };
 
+                // 如果 发行日期 不为空
                 if (detail.ReleaseDate != null)
                 {
+                    // 设置 发行日期
                     movie.PremiereDate = detail.ReleaseDate;
+                    // 设置 年份
                     movie.ProductionYear = detail.ReleaseDate?.Year;
                 }
                 /*
+                // 添加系列
                 data.Series.ForEach((item) =>
                 {
                     media.AddGenre($"S: {item}");
                 });
                 */
+                // 添加类别
                 detail.Genres.ForEach((item) =>
                 {
                     movie.AddGenre(item);
                 });
 
+                // 添加 工作室
                 detail.Productors.ForEach((item) =>
                 {
                     movie.AddStudio(item);
                 });
 
+                // 添加 发行商
                 detail.Publishers.ForEach((publisher) =>
                 {
                     if (!movie.Studios.Contains(publisher))
@@ -434,6 +447,7 @@ namespace Jellyfin.Plugin.AvMoo.Providers
                 });
 
                 return movie;
+
             }, cancellationToken);
         }
 
@@ -464,6 +478,7 @@ namespace Jellyfin.Plugin.AvMoo.Providers
                 }
 
                 return result;
+
             }, cancellationToken);
         }
     }

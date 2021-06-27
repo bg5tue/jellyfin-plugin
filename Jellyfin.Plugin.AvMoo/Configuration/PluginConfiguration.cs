@@ -157,7 +157,7 @@ namespace Jellyfin.Plugin.AvMoo.Configuration
             ActressListPattern = @"avatar-waterfall"">\s*(?<actresses>[\w\W]*?)\s*</div>\s*<div";
             ActressPattern = @"href=""(?<url>.*?)""[\w\W]*?src=""(?<photo>.*?)""[\w\W]*?<span>(?<name>.*?)<";
             ScreenshotListPattern = @"sample-waterfall"">\s*(?<thumbnails>[\w\W]*?)\s*</div>\s*<div";
-            ScreenshotPattern = "href=\"(?<url>.*?)\">(?<name>.*?)<";
+            ScreenshotPattern = @"href=""(?<url>.*?)""\stitle=""(?<name>.*?)""";
         }
     }
 }
