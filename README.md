@@ -4,6 +4,10 @@
 
 用于刮削某些影片元数据的 Jellyfin 插件。
 
+目前已经支持 `AvMoo`，后续会支持 `JavBus`、`SodPrime` 等。
+
+> 支持的 Jellyfin 版本：10.7.6
+
 ## 安装
 
 ### 通用方法
@@ -19,7 +23,7 @@
 待完善...
 
 ## 使用
-库管理中启用元数据下载器 `AvMoo Movie Provider` 和 图片下载器 `AvMoo Image Provider` 后，再更新元数据。
+库管理中启用元数据下载器 `AvMoo Movie Provider` 和 图片下载器 `AvMoo Image Provider` 后，然后更新元数据。
 
 ## 更新记录
 
