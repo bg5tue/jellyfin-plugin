@@ -30,6 +30,14 @@
                 "sourceUrl": "https://gitee.com/bg5tue/jellyfin-plugin/attach_files/753827/download/Jellyfin.Plugin.AvMoo.zip",
                 "timestamp": "2021-06-27 12:42:31",
                 "version": "1.2.4"
+            },
+            {
+                "checksum": "a173b1caf3ee1226568e6685f1cc8ade",
+                "changelog": "* 修复修复列表为“缩略图”显示时无封面的问题。（感谢 @Mikoto 的建议）",
+                "targetAbi": "10.7.0.0",
+                "sourceUrl": "https://gitee.com/bg5tue/jellyfin-plugin/attach_files/908347/download/Jellyfin.Plugin.AvMoo.v1.2.5.zip",
+                "timestamp": "2021-12-09 22:53:21",
+                "version": "1.2.5"
             }
         ]
     }
