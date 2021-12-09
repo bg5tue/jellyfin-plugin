@@ -86,6 +86,14 @@ namespace Jellyfin.Plugin.AvMoo.Providers
                         Url = imgUrl,
                         Type = ImageType.Backdrop
                     });
+
+                    // 列表为“缩略图”显示时，显示大封面
+                    list.Add(new RemoteImageInfo
+                    {
+                        ProviderName = Name,
+                        Url = imgUrl,
+                        Type = ImageType.Thumb
+                    });
                 }
             }
 
