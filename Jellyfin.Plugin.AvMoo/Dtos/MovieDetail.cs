@@ -8,19 +8,47 @@ namespace Jellyfin.Plugin.AvMoo.Dtos
 {
     public class MovieDetail
     {
+        /// <summary>
+        /// 番号
+        /// </summary>
         public string AvId { get; set; }
 
+        /// <summary>
+        /// 标题
+        /// </summary>
         public string Title { get; set; }
 
+        /// <summary>
+        /// 发行日期
+        /// </summary>
         public DateTime? ReleaseDate { get; set; }
 
+        /// <summary>
+        /// 年份
+        /// </summary>
         public int Year { get; set; }
 
+        /// <summary>
+        /// 时长
+        /// </summary>
         public int Duration { get; set; }
 
+        /// <summary>
+        /// 简介
+        /// </summary>
         public string Intro { get; set; }
 
         public Avatar Images { get; set; } = new Avatar();
+
+        /// <summary>
+        /// 大封面
+        /// </summary>
+        public string Cover { get; set; }
+
+        /// <summary>
+        /// 小封面
+        /// </summary>
+        public string SmallCover => Cover?.Replace("pl", "ps");
 
         public List<PersonModel> Directors { get; set; } = new List<PersonModel>();
 

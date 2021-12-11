@@ -5,22 +5,22 @@ namespace Jellyfin.Plugin.AvMoo.Configuration
     public enum Language
     {
         /// <summary>
-        /// Ó¢Óï
+        /// è‹±è¯­
         /// </summary>
         En,
 
         /// <summary>
-        /// ÈÕÓï
+        /// æ—¥è¯­
         /// </summary>
         Ja,
 
         /// <summary>
-        /// ·±ÌåÖĞÎÄ
+        /// ç¹ä½“ä¸­æ–‡
         /// </summary>
         Tw,
 
         /// <summary>
-        /// ¼òÌåÖĞÎÄ
+        /// ç®€ä½“ä¸­æ–‡
         /// </summary>
         Cn
     }
@@ -30,107 +30,107 @@ namespace Jellyfin.Plugin.AvMoo.Configuration
         // store configurable settings your plugin might need
 
         /// <summary>
-        /// ÓòÃû
+        /// åŸŸå
         /// </summary>
         public string Domain { get; set; }
 
         /// <summary>
-        /// ÓïÑÔ
+        /// è¯­è¨€
         /// </summary>
         public Language Language { get; set; }
 
         /// <summary>
-        /// ËÑË÷½á¹ûÕıÔò
+        /// æœç´¢ç»“æœæ­£åˆ™
         /// </summary>
         public string SearchResultPattern { get; set; }
 
         /// <summary>
-        /// ´ó·âÃæÍ¼ÕıÔò
+        /// å¤§å°é¢å›¾æ­£åˆ™
         /// </summary>
         public string CoverPattern { get; set; }
 
         /// <summary>
-        /// ·¬ºÅºÍ±êÌâÕıÔò
+        /// ç•ªå·å’Œæ ‡é¢˜æ­£åˆ™
         /// </summary>
         public string TitlePattern { get; set; }
 
         /// <summary>
-        /// ·¢ĞĞÈÕÆÚÕıÔò
+        /// å‘è¡Œæ—¥æœŸæ­£åˆ™
         /// </summary>
         public string ReleaseDatePattern { get; set; }
 
         /// <summary>
-        /// Ê±³¤ÕıÔò
+        /// æ—¶é•¿æ­£åˆ™
         /// </summary>
         public string DurationPattern { get; set; }
 
         /// <summary>
-        /// µ¼ÑİÁĞ±íÕıÔò
+        /// å¯¼æ¼”åˆ—è¡¨æ­£åˆ™
         /// </summary>
         public string DirectorListPattern { get; set; }
 
         /// <summary>
-        /// µ¼ÑİÕıÔò
+        /// å¯¼æ¼”æ­£åˆ™
         /// </summary>
         public string DirectorPattern { get; set; }
 
         /// <summary>
-        /// ¹¤×÷ÊÒÁĞ±íÕıÔò
+        /// å·¥ä½œå®¤åˆ—è¡¨æ­£åˆ™
         /// </summary>
         public string StudioListPattern { get; set; }
 
         /// <summary>
-        /// ¹¤×÷ÊÒÕıÔò
+        /// å·¥ä½œå®¤æ­£åˆ™
         /// </summary>
         public string StudioPattern { get; set; }
 
         /// <summary>
-        /// ·¢ĞĞÉÌÁĞ±íÕıÔò
+        /// å‘è¡Œå•†åˆ—è¡¨æ­£åˆ™
         /// </summary>
         public string LabelListPattern { get; set; }
 
         /// <summary>
-        /// ·¢ĞĞÉÌÕıÔò
+        /// å‘è¡Œå•†æ­£åˆ™
         /// </summary>
         public string LabelPattern { get; set; }
 
         /// <summary>
-        /// ÏµÁĞÁĞ±íÕıÔò
+        /// ç³»åˆ—åˆ—è¡¨æ­£åˆ™
         /// </summary>
         public string CollectionListPattern { get; set; }
 
         /// <summary>
-        /// ÏµÁĞÕıÔò
+        /// ç³»åˆ—æ­£åˆ™
         /// </summary>
         public string CollectionPattern { get; set; }
 
         /// <summary>
-        /// Àà±ğÁĞ±íÕıÔò
+        /// ç±»åˆ«åˆ—è¡¨æ­£åˆ™
         /// </summary>
         public string GenreListPattern { get; set; }
 
         /// <summary>
-        /// Àà±ğÕıÔò
+        /// ç±»åˆ«æ­£åˆ™
         /// </summary>
         public string GenrePattern { get; set; }
 
         /// <summary>
-        /// ÑİÔ±ÁĞ±íÕıÔò
+        /// æ¼”å‘˜åˆ—è¡¨æ­£åˆ™
         /// </summary>
         public string ActressListPattern { get; set; }
 
         /// <summary>
-        /// ÑİÔ±ÕıÔò
+        /// æ¼”å‘˜æ­£åˆ™
         /// </summary>
         public string ActressPattern { get; set; }
 
         /// <summary>
-        /// ËõÂÔÍ¼ÁĞ±íÕıÔò
+        /// ç¼©ç•¥å›¾åˆ—è¡¨æ­£åˆ™
         /// </summary>
         public string ScreenshotListPattern { get; set; }
 
         /// <summary>
-        /// ËõÂÔÍ¼ÕıÔò
+        /// ç¼©ç•¥å›¾æ­£åˆ™
         /// </summary>
         public string ScreenshotPattern { get; set; }
 
@@ -139,20 +139,21 @@ namespace Jellyfin.Plugin.AvMoo.Configuration
             // set default options here
             Language = Language.Cn;
             Domain = "avmoo.casa";
-            SearchResultPattern = @"/movie/([\d\w]+)";
+            // SearchResultPattern = @"/movie/([\d\w]+)";
+            SearchResultPattern = @"movie/(?<id>.*?)""[\w\W]*?src=""(?<poster>.*?)""\stitle=""(?<title>.*?)""[\w\W]*?<br><date>(?<avid>.*?)</date>\s/\s<date>(?<date>.*?)</"; 
             CoverPattern = @"bigImage""\shref=""(?<large>.*?)""";
             TitlePattern = @"<h3>(?<id>[A-Z\d\-]+)\s(?<title>.*?)</h3>";
-            ReleaseDatePattern = @"·¢ĞĞÊ±¼ä:</span>\s(?<date>.*?)</p>";
-            DurationPattern = @"³¤¶È:</span>\s(?<duration>\d+)";
-            DirectorListPattern = @"µ¼Ñİ:</span>\s(?<directors>.*?)</p>";
+            ReleaseDatePattern = @"å‘è¡Œæ—¶é—´:</span>\s(?<date>.*?)</p>";
+            DurationPattern = @"é•¿åº¦:</span>\s(?<duration>\d+)";
+            DirectorListPattern = @"å¯¼æ¼”:</span>\s(?<directors>.*?)</p>";
             DirectorPattern = "href=\"(?<url>.*?)\">(?<name>.*?)<";
-            StudioListPattern = @"ÖÆ×÷ÉÌ:\s</p>\s*<p>(?<productors>.*?)\s*</p>";
+            StudioListPattern = @"åˆ¶ä½œå•†:\s</p>\s*<p>(?<productors>.*?)\s*</p>";
             StudioPattern = "href=\"(?<url>.*?)\">(?<name>.*?)<";
-            LabelListPattern = @"·¢ĞĞÉÌ:\s</p>\s*<p>(?<publishers>.*?)\s*</p>";
+            LabelListPattern = @"å‘è¡Œå•†:\s</p>\s*<p>(?<publishers>.*?)\s*</p>";
             LabelPattern = "href=\"(?<url>.*?)\">(?<name>.*?)<";
-            CollectionListPattern = @"ÏµÁĞ:</p>\s*<p>(?<series>.*?)\s*</p>";
+            CollectionListPattern = @"ç³»åˆ—:</p>\s*<p>(?<series>.*?)\s*</p>";
             CollectionPattern = "href=\"(?<url>.*?)\">(?<name>.*?)<";
-            GenreListPattern = @"Àà±ğ:</p>\s*<p>(?<genres>.*?)\s*</p>";
+            GenreListPattern = @"ç±»åˆ«:</p>\s*<p>(?<genres>.*?)\s*</p>";
             GenrePattern = "href=\"(?<url>.*?)\">(?<name>.*?)<";
             ActressListPattern = @"avatar-waterfall"">\s*(?<actresses>[\w\W]*?)\s*</div>\s*<div";
             ActressPattern = @"href=""(?<url>.*?)""[\w\W]*?src=""(?<photo>.*?)""[\w\W]*?<span>(?<name>.*?)<";

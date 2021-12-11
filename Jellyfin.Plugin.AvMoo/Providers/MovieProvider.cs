@@ -18,10 +18,10 @@ using System.Threading.Tasks;
 
 namespace Jellyfin.Plugin.AvMoo.Providers
 {
-    public class MovieProvider : IHasOrder, IRemoteMetadataProvider<Series, SeriesInfo>, IRemoteMetadataProvider<Movie, MovieInfo>
+    public class MovieProvider : IHasOrder, IRemoteMetadataProvider<Movie, MovieInfo>
     {
         private readonly IHttpClientFactory _httpClientFactory;
-        private readonly ILogger _logger;
+        private readonly ILogger<MovieProvider> _logger;
 
         public int Order => 3;
 
@@ -44,11 +44,12 @@ namespace Jellyfin.Plugin.AvMoo.Providers
             // 如果 AvMoo Id 为空，则根据标题重新获取，且默认使用结果的第一条数据
             if (string.IsNullOrWhiteSpace(id))
             {
-                var idList = await GetIdsAsync(info.Name, cancellationToken);
+                //var results = await GetIdsAsync(info.Name, cancellationToken);
+                var results = (await SearchMovieAsync(info.Name, cancellationToken).ConfigureAwait(false)).Select(item => item.Id);
 
-                if (idList.Count() > 0)
+                if (results.Count() > 0)
                 {
-                    id = idList.FirstOrDefault();
+                    id = results.FirstOrDefault();
                 }
                 else
                 {
@@ -71,37 +72,41 @@ namespace Jellyfin.Plugin.AvMoo.Providers
         public async Task<IEnumerable<RemoteSearchResult>> GetSearchResults(MovieInfo searchInfo, CancellationToken cancellationToken)
         {
             var results = new List<RemoteSearchResult>();
-            var idList = new List<string>();
+            var ids = new List<string>();
+            var searchResults = new List<SearchResult>();
 
             // 获取 AvMoo Id
-            var id = searchInfo.GetProviderId(Plugin.ProviderId);
+            var avmooId = searchInfo.GetProviderId(Plugin.ProviderId);
 
-            if (!string.IsNullOrEmpty(id))
+            if (!string.IsNullOrEmpty(avmooId))
             {
                 // id 不为空，添加到 id 列表
-                idList = new List<string>
+                ids = new List<string>
                 {
-                    id
+                    avmooId
                 };
             }
             else
             {
                 // id 为空，则通过名称在线搜索并返回搜索结果的 id 列表
-                idList = (List<string>)await GetIdsAsync(searchInfo.Name, cancellationToken).ConfigureAwait(false);
+                //ids = (List<string>)await GetIdsAsync(searchInfo.Name, cancellationToken).ConfigureAwait(false);
+                searchResults = (List<SearchResult>)await SearchMovieAsync(searchInfo.Name, cancellationToken).ConfigureAwait(false);
+                ids = searchResults.Select(item => item.Id).ToList();
             }
 
             // 遍历 id 列表
-            foreach (string idItem in idList)
+            foreach (string id in ids)
             {
                 // 获取 id 为 idItem 的影片详情
-                var item = await GetDetailAsync(idItem, cancellationToken).ConfigureAwait(false);
+                var item = await GetMovieDetailAsync(id, cancellationToken).ConfigureAwait(false);
 
                 // 转换为 Jellyfin 查找结果(RemoteSearchResult)对象
                 var searchResult = new RemoteSearchResult()
                 {
                     Name = item.Title,
-                    ImageUrl = item.Images.Large,
-                    Overview = item.Intro
+                    ImageUrl = item.SmallCover,
+                    Overview = item.Intro,
+                    SearchProviderName = Name
                 };
 
                 // 如果发行日期不为空，则设置年份
@@ -119,16 +124,6 @@ namespace Jellyfin.Plugin.AvMoo.Providers
             }
 
             return results;
-        }
-
-        public Task<MetadataResult<Series>> GetMetadata(SeriesInfo info, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<RemoteSearchResult>> GetSearchResults(SeriesInfo searchInfo, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -152,15 +147,15 @@ namespace Jellyfin.Plugin.AvMoo.Providers
         }
 
         /// <summary>
-        /// 根据关键字搜索影片，并取得搜索结果的影片 id 列表。
-        /// 例如 /movie/b1542bc3132897c7 中 /movie/id
+        /// 根据关键字搜索影片，并取得搜索结果列表。
+        /// 例如 /movie/b1542bc3132897c7 中 /movie/后面的 b1542bc3132897c7
         /// </summary>
         /// <param name="key"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task<IEnumerable<string>> GetIdsAsync(string key, CancellationToken cancellationToken)
+        public async Task<IEnumerable<SearchResult>> SearchMovieAsync(string key, CancellationToken cancellationToken)
         {
-            var idList = new List<string>();
+            var results = new List<SearchResult>();
 
             // 查找页 url
             var url = $"https://{Plugin.Instance.Configuration.Domain}/{Plugin.Instance.Configuration.Language.ToString().ToLower()}/search/{key}";
@@ -175,12 +170,19 @@ namespace Jellyfin.Plugin.AvMoo.Providers
             {
                 if (match.Success)
                 {
-                    idList.Add(match.Groups[1].Value.Trim());
+                    results.Add(new SearchResult
+                    {
+                        Id = match.Groups["id"].Value.Trim(),
+                        Poster = match.Groups["poster"].Value.Trim(),
+                        Title = match.Groups["title"].Value.Trim(),
+                        ReleaseData = match.Groups["date"].Value.Trim(),
+                        Avid = match.Groups["avid"].Value.Trim()
+                    });
                 }
             }
 
-            // 返回 7 条记录
-            return idList.Distinct().Take(7).ToList();
+            // 返回 30 条记录
+            return results.Distinct().Take(30).ToList();
         }
 
 
@@ -195,7 +197,7 @@ namespace Jellyfin.Plugin.AvMoo.Providers
             }
 
             // 取得 影片详情
-            var movie = await GetDetailAsync(id, cancellationToken);
+            var movie = await GetMovieDetailAsync(id, cancellationToken);
 
             // 设置要返回的结果项
             result.Item = await TransMediaInfoAsync(movie, cancellationToken);
@@ -221,7 +223,7 @@ namespace Jellyfin.Plugin.AvMoo.Providers
             return result;
         }
 
-        public async Task<MovieDetail> GetDetailAsync(string id, CancellationToken cancellationToken)
+        public async Task<MovieDetail> GetMovieDetailAsync(string id, CancellationToken cancellationToken)
         {
             // id 不能为空
             if (string.IsNullOrWhiteSpace(id))
@@ -252,15 +254,16 @@ namespace Jellyfin.Plugin.AvMoo.Providers
                 // 设置标题
                 movie.Title = match.Groups["title"].Value.Trim();
             }
-            /*
+
             // 匹配 大封面
             match = Regex.Match(html, Plugin.Instance.Configuration.CoverPattern); //@"bigImage""\shref=""(?<large>.*?)"""
 
             if (match.Success)
             {
                 movie.Images.Large = match.Groups["large"].Value.Trim();
+                movie.Cover = match.Groups["large"].Value.Trim();
             }
-            */
+
             // 匹配 发行日期
             match = Regex.Match(html, Plugin.Instance.Configuration.ReleaseDatePattern); //@"发行时间:</span>\s(?<date>.*?)</p>"
             if (match.Success)
