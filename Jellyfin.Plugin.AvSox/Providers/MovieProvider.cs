@@ -1,19 +1,14 @@
 ﻿using Jellyfin.Plugin.AvSox.Dtos;
 using Jellyfin.Plugin.AvSox.Utils;
 using MediaBrowser.Common.Net;
-using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Entities.Movies;
-using MediaBrowser.Controller.Entities.TV;
 using MediaBrowser.Controller.Providers;
 using MediaBrowser.Model.Entities;
 using MediaBrowser.Model.Providers;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -24,7 +19,7 @@ namespace Jellyfin.Plugin.AvSox.Providers
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly ILogger<MovieProvider> _logger;
         private readonly InfoHelper _infoHelper;
-
+        
         public int Order => 3;
 
         public string Name => "AvSox Movie Provider";
@@ -52,7 +47,6 @@ namespace Jellyfin.Plugin.AvSox.Providers
             {
                 //var results = await GetIdsAsync(info.Name, cancellationToken);
                 var results = (await _infoHelper.SearchMovieAsync(info.Name, cancellationToken).ConfigureAwait(false)).Select(item => item.Id);
-                _logger.LogInformation($"get metadata search result: {string.Join(", ", results)}");
                 if (results.Count() > 0)
                 {
                     id = results.FirstOrDefault();
@@ -62,7 +56,7 @@ namespace Jellyfin.Plugin.AvSox.Providers
                     return new MetadataResult<Movie>();
                 }
             }
-            _logger.LogInformation($"id: {id}");
+
             // 获取 元数据
             var movie = await _infoHelper.GetMetadata<Movie>(id, cancellationToken);
 
@@ -99,11 +93,10 @@ namespace Jellyfin.Plugin.AvSox.Providers
                 searchResults = (List<SearchResult>)await _infoHelper.SearchMovieAsync(searchInfo.Name, cancellationToken).ConfigureAwait(false);
                 ids = searchResults.Select(item => item.Id).ToList();
             }
-            _logger.LogInformation($"ids: {string.Join(",", ids)}");
+
             // 遍历 id 列表
             foreach (string id in ids)
             {
-                _logger.LogInformation($"id: {id}");
                 // 获取 id 为 idItem 的影片详情
                 var item = await _infoHelper.GetMovieDetailAsync(id, cancellationToken).ConfigureAwait(false);
 

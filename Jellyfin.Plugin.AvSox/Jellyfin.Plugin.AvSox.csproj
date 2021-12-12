@@ -5,6 +5,7 @@
     <RootNamespace>Jellyfin.Plugin.AvSox</RootNamespace>
     <AssemblyVersion>1.2.5</AssemblyVersion>
     <FileVersion>1.0</FileVersion>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>

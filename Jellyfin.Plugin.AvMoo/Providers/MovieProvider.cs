@@ -374,21 +374,6 @@ namespace Jellyfin.Plugin.AvMoo.Providers
                     }
                 }
             }
-            /*
-            // 匹配 缩略图
-            match = Regex.Match(html, Plugin.Instance.Configuration.ScreenshotListPattern); //@"sample-waterfall"">\s*(?<thumbnails>[\w\W]*?)\s*</div>\s*<div"
-            if (match.Success)
-            {
-                var items = Regex.Matches(match.Groups["thumbnails"].Value, Plugin.Instance.Configuration.ScreenshotPattern); //"href=\"(?<url>.*?)\">(?<name>.*?)<"
-                foreach (Match item in items)
-                {
-                    if (item.Success)
-                    {
-                        movie.Thumbnails.Add(item.Groups["url"].Value.Trim());
-                    }
-                }
-            }
-            */
             return movie;
         }
 
@@ -421,13 +406,7 @@ namespace Jellyfin.Plugin.AvMoo.Providers
                     // 设置 年份
                     movie.ProductionYear = detail.ReleaseDate?.Year;
                 }
-                /*
-                // 添加系列
-                data.Series.ForEach((item) =>
-                {
-                    media.AddGenre($"S: {item}");
-                });
-                */
+
                 // 添加类别
                 detail.Genres.ForEach((item) =>
                 {

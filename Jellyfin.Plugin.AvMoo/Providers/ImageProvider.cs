@@ -65,8 +65,6 @@ namespace Jellyfin.Plugin.AvMoo.Providers
                 // 取得图片 url
                 var imgUrl = match.Groups["large"].Value.Trim();
 
-                _logger.LogInformation($"大封面 url: {imgUrl}");
-
                 // 如果图片 url 不为空
                 if (!string.IsNullOrEmpty(imgUrl))
                 {
@@ -101,9 +99,7 @@ namespace Jellyfin.Plugin.AvMoo.Providers
             // 预览图 列表表达式
             pattern = Plugin.Instance.Configuration.ScreenshotListPattern; //sample-waterfall"">\s*(?<thumbnails>[\w\W]*?)\s*</div>\s*<div
             // 匹配
-            match = Regex.Match(html, pattern);  
-            
-            _logger.LogInformation("匹配预览图");
+            match = Regex.Match(html, pattern);
 
             // 匹配到数据
             if (match.Success)
@@ -111,12 +107,8 @@ namespace Jellyfin.Plugin.AvMoo.Providers
                 // 获取 预览图 表达式
                 pattern = Plugin.Instance.Configuration.ScreenshotPattern; //href="(?<url>.*?)"\stitle="(?<name>.*?)"
 
-                _logger.LogInformation($"预览图表达式: {pattern}");
-
                 // 匹配 预览图 列表
                 var matches = Regex.Matches(match.Groups["thumbnails"].Value, pattern);
-
-                _logger.LogInformation($"匹配到 {matches.Count} 预览图");
 
                 // 遍历列表
                 foreach (Match m in matches)
@@ -126,8 +118,6 @@ namespace Jellyfin.Plugin.AvMoo.Providers
                     {
                         // 图片 url
                         var imgUrl = m.Groups["url"].Value.Trim();
-
-                        _logger.LogInformation($"缩略图: {imgUrl}");
 
                         list.Add(new RemoteImageInfo
                         {

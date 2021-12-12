@@ -4,7 +4,7 @@
 
 用于刮削某些影片元数据的 Jellyfin 插件。
 
-目前已经支持 `AvMoo`，后续会支持 `JavBus`、`SodPrime` 等。
+目前已经支持 `AVMOO` `AVSOX`，后续会支持 `JavBus`、`SodPrime` 等。
 
 > **建议**：
 > 
@@ -30,25 +30,25 @@
 
 ## 使用
 
-库管理中启用元数据下载器 `AvMoo Movie Provider` 和 图片下载器 `AvMoo Image Provider` 后，然后更新元数据。
+在 `控制台` - `媒体库` - `管理媒体库` 中启用相关的元数据下载器和图片下载器，并按个人需求调整好顺序后，更新元数据。
 
-## 更新记录
+## 常见问题
 
-### v1.2.4 2021.6.27
+### Q：所有影片都刮削不到数据
 
-* 修复 ExternalId 中的 UrlFormatString 没有 https 导致无法打开源影片页面的问题。
-* 修复上一版本号错误问题。
+A：请参考插件设备重新设置可用域名，或考虑科学上网。
 
-### v1.1.3 2021.6.27
+### Q：自动刮削的信息与实际不对应
 
-* 新增图片下载功能，具体在影片菜单“修改图片”中使用。
-* 修复配置默认值中缩略图单图正则不正确，导致获取不到截图的问题。
+A：视频文件文件名改为 `识别号` 命名可以增加准确率。
 
-### v1.1.2 2021.6.25
+### Q：更新后识别的数据或封面异常
 
-已实现基础数据刮削功能，可以正确的刮削文本数据。
+A：检查插件设置中的正则规则，更新插件后可能无法自动更新已经生成的规则文件，请停止 jellyfin 服务（`控制台` - `关机`），然后根据 jellyfin 版本，打开以下目录：
 
-未实现功能：
+* Windows 绿色版：
+  `C:\Users\用户名\AppData\Local\jellyfin\plugins\configurations` 
 
-1. 刮削图片；
-2. 系列功能。
+* Windows 安装版：`C:\ProgramData\Jellyfin\Server\plugins\configurations`
+
+手动删除（如有自定义规则，请先备份相关规则！）目录下的 `Jellyfin.Plugin.AvMoo.xml` 和 `Jellyfin.Plugin.AvSox.xml` 两个文件，重新开启 jellyfin，检查刮削的数据是否正常。

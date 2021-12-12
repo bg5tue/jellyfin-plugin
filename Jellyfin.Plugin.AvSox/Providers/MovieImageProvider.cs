@@ -69,8 +69,6 @@ namespace Jellyfin.Plugin.AvSox.Providers
             // 取得番号（获取小封面图 Poster 用）
             var avid = (await _infoHelper.GetTitleAndIdAsync(html, cancellationToken).ConfigureAwait(false)).id;
 
-            _logger.LogInformation($"avid: {avid}");
-
             if (!string.IsNullOrEmpty(fanart))
             {
                 // 如果图片 url 不为空

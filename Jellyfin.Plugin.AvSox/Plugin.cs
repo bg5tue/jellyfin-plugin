@@ -18,7 +18,7 @@ namespace Jellyfin.Plugin.AvSox
 
         public static Plugin Instance { get; private set; }
 
-        public static string ProviderId => "AvSox Id";        
+        public static string ProviderId => "AvSox Id"; 
 
         public Plugin(IApplicationPaths applicationPaths, IXmlSerializer xmlSerializer) 
             : base(applicationPaths, xmlSerializer)

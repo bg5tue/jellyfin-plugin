@@ -107,7 +107,6 @@ namespace Jellyfin.Plugin.AvSox.Utils
                 _logger.LogError("id is null.");
                 throw new ArgumentException("sid is empty when getting subject");
             }
-            _logger.LogInformation($"get movie detail: {id}");
             // 详情页 url
             var url = $"https://{Plugin.Instance.Configuration.Domain}/{Plugin.Instance.Configuration.Language.ToString().ToLower()}/movie/{id}";
 
@@ -115,7 +114,6 @@ namespace Jellyfin.Plugin.AvSox.Utils
             var html = await GetHtmlAsync(url, cancellationToken);
 
             var ti = await GetTitleAndIdAsync(html, cancellationToken);
-            _logger.LogInformation($"get movie detail: {ti.id}");
             return new MovieDetail
             {
                 AvId = ti.id,
@@ -146,16 +144,10 @@ namespace Jellyfin.Plugin.AvSox.Utils
             {
                 var match = Regex.Match(html, Plugin.Instance.Configuration.TitlePattern); //@"<h3>(?<id>[A-Za-z\d\-]+)\s(?<title>.*?)</h3>"
 
-                _logger.LogInformation($"GetTitleAndIdAsync() => title pattern: {Plugin.Instance.Configuration.TitlePattern}");
-
-                _logger.LogInformation($"GetTitleAndIdAsync() => match: {match.Success}");
-
                 if (match.Success)
                 {
                     var id1=match.Groups["id"].Value.Trim();
-                    _logger.LogInformation($"GetTitleAndIdAsync() => id: {id1}");
                     var title1=match.Groups["title"].Value.Trim();
-                    _logger.LogInformation($"GetTitleAndIdAsync() => title: {title1}");
                     return (title1, id1);
                 }
                 return (null, null);
@@ -173,11 +165,9 @@ namespace Jellyfin.Plugin.AvSox.Utils
             string id,
             CancellationToken cancellationToken)
         {
-            _logger.LogInformation($"get poster, id: {id}");
             var items = await SearchMovieAsync(id, cancellationToken).ConfigureAwait(false);
 
             var posters = items.Select(x => x.Poster).ToList();
-            _logger.LogInformation($"poster list: {string.Join(",", posters)}");
 
             return items.FirstOrDefault().Poster;
         }

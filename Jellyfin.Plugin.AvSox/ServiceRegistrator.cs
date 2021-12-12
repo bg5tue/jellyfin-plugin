@@ -12,6 +12,7 @@ namespace Jellyfin.Plugin.AvSox
         /// <inheritdoc />
         public void RegisterServices(IServiceCollection serviceCollection)
         {
+            // 注入
             serviceCollection.AddSingleton<InfoHelper>();
         }
     }
