@@ -76,14 +76,14 @@ namespace Jellyfin.Plugin.AvMoo.Providers
             var searchResults = new List<SearchResult>();
 
             // 获取 AvMoo Id
-            var avmooId = searchInfo.GetProviderId(Plugin.ProviderId);
+            var AvMooId = searchInfo.GetProviderId(Plugin.ProviderId);
 
-            if (!string.IsNullOrEmpty(avmooId))
+            if (!string.IsNullOrEmpty(AvMooId))
             {
                 // id 不为空，添加到 id 列表
                 ids = new List<string>
                 {
-                    avmooId
+                    AvMooId
                 };
             }
             else

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>AvSox 设置</title>
+</head>
+<body>
+    <div id="ConfigPage" data-role="page" class="page type-interior pluginConfigurationPage" data-require="emby-input,emby-button,emby-select,emby-checkbox">
+        <div data-role="content">
+            <div class="content-primary">
+                <form id="ConfigForm">
+                    <div class="inputContainer">
+                        <label class="inputeLabel inputLabelUnfocused" for="domain">域名</label>
+                        <input id="domain" name="domain" type="text" is="emby-input" />
+                        <div class="fieldDescription">请填写可以直连的域名，如果域名无法直连，请科学上网。</div>
+                    </div>
+                    <div class="selectContainer">
+                        <label class="selectLabel" for="lang">语言</label>
+                        <select is="emby-select" id="lang" name="lang" class="emby-select-withcolor emby-select">
+                            <option id="optEn" value="En">English</option>
+                            <option id="optJa" value="Ja">日本语</option>
+                            <option id="optTw" value="Tw">正體中文</option>
+                            <option id="optCn" value="Cn">简体中文</option>
+                        </select>
+                        <div class="fieldDescription"><b>默认只支持简体中文</b>，如需要支持其它语言，请自行参照网页上的内容修改相关正则表达式。</div>
+                    </div>
+                    <div class="inputContainer">
+                        <label class="inputeLabel inputLabelUnfocused" for="patternSearchResult">搜索结果列表正则</label>
+                        <input id="patternSearchResult" name="patternSearchResult" type="text" is="emby-input" />
+                        <div class="fieldDescription">用于在返回的搜索结果列表中查找影片的的正则表达式。</div>
+                    </div>
+                    <div class="inputContainer">
+                        <label class="inputeLabel inputLabelUnfocused" for="patternCover">大封面图正则</label>
+                        <input id="patternCover" name="patternCover" type="text" is="emby-input" />
+                        <div class="fieldDescription">获取大封面图的正则表达式。</div>
+                    </div>
+                    <div class="inputContainer">
+                        <label class="inputeLabel inputLabelUnfocused" for="patternTitle">番号和片名正则</label>
+                        <input id="patternTitle" name="patternTitle" type="text" is="emby-input" />
+                        <div class="fieldDescription">获取番号和片名的正则表达式。（如果要匹配多语言，请使用正则的分组功能设置不同语言的匹配组。）</div>
+                    </div>
+                    <div class="inputContainer">
+                        <label class="inputeLabel inputLabelUnfocused" for="patternReleaseDate">发行日期正则</label>
+                        <input id="patternReleaseDate" name="patternReleaseDate" type="text" is="emby-input" />
+                        <div class="fieldDescription">获取发行日期的正则表达式。（如果要匹配多语言，请使用正则的分组功能设置不同语言的匹配组。）</div>
+                    </div>
+                    <div class="inputContainer">
+                        <label class="inputeLabel inputLabelUnfocused" for="patternDuration">影片时长正则</label>
+                        <input id="patternDuration" name="patternDuration" type="text" is="emby-input" />
+                        <div class="fieldDescription">获取影片时长的正则表达式。（如果要匹配多语言，请使用正则的分组功能设置不同语言的匹配组。）</div>
+                    </div>
+                    <div class="inputContainer">
+                        <label class="inputeLabel inputLabelUnfocused" for="patternDirectorList">导演列表正则</label>
+                        <input id="patternDirectorList" name="patternDirectorList" type="text" is="emby-input" />
+                        <div class="fieldDescription">获取导演列表的正则表达式。（如果要匹配多语言，请使用正则的分组功能设置不同语言的匹配组。）</div>
+                    </div>
+                    <div class="inputContainer">
+                        <label class="inputeLabel inputLabelUnfocused" for="patternDirector">导演正则</label>
+                        <input id="patternDirector" name="patternDirector" type="text" is="emby-input" />
+                        <div class="fieldDescription">获取导演名字的正则表达式。</div>
+                    </div>
+                    <div class="inputContainer">
+                        <label class="inputeLabel inputLabelUnfocused" for="patternStudioList">工作室列表正则</label>
+                        <input id="patternStudioList" name="patternStudioList" type="text" is="emby-input" />
+                        <div class="fieldDescription">获取工作室列表的正则表达式。（如果要匹配多语言，请使用正则的分组功能设置不同语言的匹配组。）</div>
+                    </div>
+                    <div class="inputContainer">
+                        <label class="inputeLabel inputLabelUnfocused" for="patternStudio">工作室正则</label>
+                        <input id="patternStudio" name="patternStudio" type="text" is="emby-input" />
+                        <div class="fieldDescription">获取工作室名字的正则表达式。</div>
+                    </div>
+                    <div class="inputContainer">
+                        <label class="inputeLabel inputLabelUnfocused" for="patternLabelList">发行商列表正则</label>
+                        <input id="patternLabelList" name="patternLabelList" type="text" is="emby-input" />
+                        <div class="fieldDescription">获取发行商列表的正则表达式。（如果要匹配多语言，请使用正则的分组功能设置不同语言的匹配组。）</div>
+                    </div>
+                    <div class="inputContainer">
+                        <label class="inputeLabel inputLabelUnfocused" for="patternLabel">发行商正则</label>
+                        <input id="patternLabel" name="patternLabel" type="text" is="emby-input" />
+                        <div class="fieldDescription">获取发行商名字的正则表达式。</div>
+                    </div>
+                    <div class="inputContainer">
+                        <label class="inputeLabel inputLabelUnfocused" for="patternCollectionList">系列列表正则</label>
+                        <input id="patternCollectionList" name="patternCollectionList" type="text" is="emby-input" />
+                        <div class="fieldDescription">获取系列列表的正则表达式。（如果要匹配多语言，请使用正则的分组功能设置不同语言的匹配组。）</div>
+                    </div>
+                    <div class="inputContainer">
+                        <label class="inputeLabel inputLabelUnfocused" for="patternCollection">系列正则</label>
+                        <input id="patternCollection" name="patternCollection" type="text" is="emby-input" />
+                        <div class="fieldDescription">获取系列名字的正则表达式。</div>
+                    </div>
+                    <div class="inputContainer">
+                        <label class="inputeLabel inputLabelUnfocused" for="patternGenreList">类别列表正则</label>
+                        <input id="patternGenreList" name="patternGenreList" type="text" is="emby-input" />
+                        <div class="fieldDescription">获取类别列表的正则表达式。（如果要匹配多语言，请使用正则的分组功能设置不同语言的匹配组。）</div>
+                    </div>
+                    <div class="inputContainer">
+                        <label class="inputeLabel inputLabelUnfocused" for="patternGenre">类别正则</label>
+                        <input id="patternGenre" name="patternGenre" type="text" is="emby-input" />
+                        <div class="fieldDescription">获取类别名字的正则表达式。</div>
+                    </div>
+                    <div class="inputContainer">
+                        <label class="inputeLabel inputLabelUnfocused" for="patternActressList">演员列表正则</label>
+                        <input id="patternActressList" name="patternActressList" type="text" is="emby-input" />
+                        <div class="fieldDescription">获取演员列表的正则表达式。</div>
+                    </div>
+                    <div class="inputContainer">
+                        <label class="inputeLabel inputLabelUnfocused" for="patternActress">演员正则</label>
+                        <input id="patternActress" name="patternActress" type="text" is="emby-input" />
+                        <div class="fieldDescription">获取演员信息的正则表达式。</div>
+                    </div>
+                    <div class="inputContainer">
+                        <label class="inputeLabel inputLabelUnfocused" for="patternScreenshotList">缩略图列表正则</label>
+                        <input id="patternScreenshotList" name="patternScreenshotList" type="text" is="emby-input" />
+                        <div class="fieldDescription">获取缩略图列表的正则表达式。</div>
+                    </div>
+                    <div class="inputContainer">
+                        <label class="inputeLabel inputLabelUnfocused" for="patternScreenshot">缩略图正则</label>
+                        <input id="patternScreenshot" name="patternScreenshot" type="text" is="emby-input" />
+                        <div class="fieldDescription">获取缩略图的正则表达式。</div>
+                    </div>
+                    <div>
+                        <button is="emby-button" type="submit" class="raised button-submit block emby-button">
+                            <span>保存</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <script type="text/javascript">
+            var Config = {
+                pluginUniqueId: '52eb4c4a-d4bc-11eb-b616-000c290aa604'
+            };
+
+            document.querySelector('#ConfigPage')
+                .addEventListener('pageshow', function() {
+                    Dashboard.showLoadingMsg();
+                    ApiClient.getPluginConfiguration(Config.pluginUniqueId).then(function (config) {
+                        document.querySelector('#domain').value = config.Domain;
+                        document.querySelector('#lang').value = config.Language;
+                        document.querySelector('#patternSearchResult').value = config.SearchResultPattern;
+                        document.querySelector('#patternCover').value = config.CoverPattern;
+                        document.querySelector('#patternTitle').value = config.TitlePattern;
+                        document.querySelector('#patternReleaseDate').value = config.ReleaseDatePattern;
+                        document.querySelector('#patternDuration').value = config.DurationPattern;
+                        document.querySelector('#patternDirectorList').value = config.DirectorListPattern;
+                        document.querySelector('#patternDirector').value = config.DirectorPattern;
+                        document.querySelector('#patternStudioList').value = config.StudioListPattern;
+                        document.querySelector('#patternStudio').value = config.StudioPattern;
+                        document.querySelector('#patternLabelList').value = config.LabelListPattern;
+                        document.querySelector('#patternLabel').value = config.LabelPattern;
+                        document.querySelector('#patternCollectionList').value = config.CollectionListPattern;
+                        document.querySelector('#patternCollection').value = config.CollectionPattern;
+                        document.querySelector('#patternGenreList').value = config.GenreListPattern;
+                        document.querySelector('#patternGenre').value = config.GenrePattern;
+                        document.querySelector('#patternActressList').value = config.ActressListPattern;
+                        document.querySelector('#patternActress').value = config.ActressPattern;
+                        document.querySelector('#patternScreenshotList').value = config.ScreenshotListPattern;
+                        document.querySelector('#patternScreenshot').value = config.ScreenshotPattern;
+                        Dashboard.hideLoadingMsg();
+                    });    
+                });
+
+            document.querySelector('#ConfigForm')
+                .addEventListener('submit', function(event) {
+                    Dashboard.showLoadingMsg();
+
+                    ApiClient.getPluginConfiguration(Config.pluginUniqueId).then(function (config) {
+                        config.Domain = document.querySelector('#domain').value;
+                        config.Language = document.querySelector('#lang').value;
+                        config.SearchResultPattern = document.querySelector('#patternSearchResult').value;
+                        config.CoverPattern = document.querySelector('#patternCover').value;
+                        config.TitlePattern = document.querySelector('#patternTitle').value;
+                        config.ReleaseDatePattern = document.querySelector('#patternReleaseDate').value;
+                        config.DurationPattern = document.querySelector('#patternDuration').value;
+                        config.DirectorListPattern = document.querySelector('#patternDirectorList').value;
+                        config.DirectorPattern = document.querySelector('#patternDirector').value;
+                        config.StudioListPattern = document.querySelector('#patternStudioList').value;
+                        config.StudioPattern = document.querySelector('#patternStudio').value;
+                        config.LabelListPattern = document.querySelector('#patternLabelList').value;
+                        config.LabelPattern = document.querySelector('#patternLabel').value;
+                        config.CollectionListPattern = document.querySelector('#patternCollectionList').value;
+                        config.CollectionPattern = document.querySelector('#patternCollection').value;
+                        config.GenreListPattern = document.querySelector('#patternGenreList').value;
+                        config.GenrePattern = document.querySelector('#patternGenre').value;
+                        config.ActressListPattern = document.querySelector('#patternActressList').value;
+                        config.ActressPattern = document.querySelector('#patternActress').value;
+                        config.ScreenshotListPattern = document.querySelector('#patternScreenshotList').value;
+                        config.ScreenshotPattern = document.querySelector('#patternScreenshot').value;
+                        ApiClient.updatePluginConfiguration(Config.pluginUniqueId, config).then(function (result) {
+                            Dashboard.processPluginConfigurationUpdateResult(result);
+                        });
+                    });
+
+                    event.preventDefault();
+                    //return false;
+            });
+        </script>
+    </div>
+</body>
+</html>
