@@ -38,6 +38,32 @@
                 "sourceUrl": "https://gitee.com/bg5tue/jellyfin-plugin/attach_files/908347/download/Jellyfin.Plugin.AvMoo.v1.2.5.zip",
                 "timestamp": "2021-12-09 22:53:21",
                 "version": "1.2.5"
+            },
+            {
+                "checksum": "e343fe38204756764dafc835e013c0f5",
+                "changelog": "* 修复识别窗口搜索结果图片显示问题 <br/> * 修改识别窗口返回结果数量（从 7 调整为 30）",
+                "targetAbi": "10.7.0.0",
+                "sourceUrl": "https://gitee.com/bg5tue/jellyfin-plugin/attach_files/910556/download/Jellyfin.Plugin.AvMoo_v1.2.6.zip",
+                "timestamp": "2021-12-12 19:59:21",
+                "version": "1.2.6"
+            }
+        ]
+    },
+    {
+        "category": "Metadata",
+        "guid": "e457fe3b-6b53-4242-878c-53ac6cc60136",
+        "name": "AvSox",
+        "description": "安装本插件，配置完相关数据后，可以从 AVSOX 获取电影元数据。",
+        "owner": "bg5tue",
+        "overview": "从 AVSOX 获取电影元数据。",
+        "versions":[
+            {
+                "checksum": "b06d7c45600326d43222f214754f3796",
+                "changelog": "已适配 AVSOX",
+                "targetAbi": "10.7.0.0",
+                "sourceUrl": "https://gitee.com/bg5tue/jellyfin-plugin/attach_files/910557/download/Jellyfin.Plugin.AvSox_1.0.1.zip",
+                "timestamp": "2021-12-12 19:59:21",
+                "version": "1.0.1"
             }
         ]
     }
