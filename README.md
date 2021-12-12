@@ -22,7 +22,11 @@
 
 ### Windows 系统
 
-下载 zip 包，解压到 `C:\ProgramData\Jellyfin\Server\plugins` 目录下，重启 Jellyfin 服务器。
+下载 zip 包，解压到以下目录下，然后重启 Jellyfin 服务器。
+
+*  `C:\ProgramData\Jellyfin\Server\plugins`
+
+*  `C:\Users\用户名\AppData\Local\jellyfin\plugins`
 
 ### Linux 系统
 
@@ -31,7 +35,7 @@
 ## 使用
 库管理中启用元数据下载器 `AvMoo Movie Provider` 和 图片下载器 `AvMoo Image Provider` 后，然后更新元数据。
 
-## 更新记录
+## 常见问题
 
 A：请参考插件设备重新设置可用域名，或通过其它方法上网。
 
